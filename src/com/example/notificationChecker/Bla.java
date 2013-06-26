@@ -1,7 +1,6 @@
 package com.example.notificationChecker;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -18,19 +17,10 @@ public class Bla extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shit);
+        setContentView(R.layout.bla_layout);
         String toPut = getIntent().getStringExtra("string");
         ((TextView)findViewById(R.id.textView)).setText(toPut);
-
-
-        Intent cit = new Intent(this, Bla.class);
-        cit.setAction("PheedTabsManager.ACTION_OPEN_PAGE");
-        cit.putExtra("string", "eat this");
-        PendingIntent.getActivity(this, 0, cit, PendingIntent.FLAG_ONE_SHOT).cancel();
-
-
-        getIntent().putExtra("string","asdasd");
-    }
+   }
 
     @Override
     protected void onStart() {

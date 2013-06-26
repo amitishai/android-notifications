@@ -13,11 +13,6 @@ import android.view.View;
 import java.util.LinkedList;
 
 public class MyActivity extends Activity {
-    public static final String ACTION_CREATE_NOTIFICATION = "com.pheed.android.ACTION_CREATE_NOTIFICATION";
-    public static final String ACTION_DELETE_NOTIFICATION = "com.pheed.android.ACTION_DELETE_NOTIFICATION";
-    public static final String EXTRA_NOTIFICATION_ID = "com.pheed.android.EXTRA_NOTIFICATION_ID";
-    public static final String EXTRA_NOTIFICATION_BODY = "com.pheed.android.EXTRA_NOTIFICATION_BODY";
-
     private static int notificationId = 1001;
     private static LinkedList<Integer> ntfList = new LinkedList<Integer>();
 
@@ -34,21 +29,17 @@ public class MyActivity extends Activity {
     }
 
     private void createNotification(Context context, Bundle bundle){
-        String body = bundle.getString(EXTRA_NOTIFICATION_BODY);
-
         Intent cit = new Intent(context, Bla.class);
-        cit.setAction("PheedTabsManager.ACTION_OPEN_PAGE");
-        cit.putExtra("string", "eat this");
+        cit.putExtra("string", "please disappear");
         PendingIntent pendingContentIntent = PendingIntent.getActivity(context, 0, cit, PendingIntent.FLAG_ONE_SHOT);
 
-        Intent dit = new Intent(ACTION_DELETE_NOTIFICATION);
-        dit.putExtra(EXTRA_NOTIFICATION_ID, notificationId);
+        Intent dit = new Intent("ACTION_DELETE_NOTIFICATION");
         PendingIntent pendingDeleteIntent = PendingIntent.getBroadcast(context, 0, dit, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification ntf = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.status_p)
-                .setTicker(body)
-                .setContentText(body)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setTicker("body")
+                .setContentText("body")
                 .setNumber(ntfList.size() > 0 ? ntfList.size() + 1 : 0)
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
@@ -63,8 +54,4 @@ public class MyActivity extends Activity {
         ntfList.add(notificationId);
         ntfManager.notify(notificationId, ntf);
     }
-
-
-
-
 }
